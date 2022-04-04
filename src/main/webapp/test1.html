@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<!--
+Project name(项目名称)：HTML5_canvas_saving_and_restoring_drawing_state
+  File name(文件名): test1
+  Authors(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/4/4
+  Time(创建时间)： 22:33
+  Description(描述)： 无
+-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="animate.css">
+    <style>
+        body {
+            background-color: #2d2c2e;
+        }
+
+        .p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        canvas {
+            border: 2px solid turquoise;
+        }
+    </style>
+</head>
+<body>
+<div class="p">
+    <canvas class="animated slideInUp" id="canvas" width="800" height="800">
+        浏览器不支持画布功能
+    </canvas>
+</div>
+
+<script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    ctx.scale(4, 4)
+
+    ctx.fillStyle = "yellow";
+
+    //save()方法通过将当前状态推送到堆栈来保存画布的整个状态。
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(100, 100, 100, 0, Math.PI * 2, true);
+    ctx.fill();
+
+    ctx.fillStyle = "orange";
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(100, 100, 80, 0, Math.PI * 2, true);
+    ctx.fill();
+
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    ctx.arc(100, 100, 60, 0, Math.PI * 2, true);
+    ctx.fill();
+
+    //restore()方法通过弹出绘图状态堆栈中的顶部条目来恢复最近保存的画布状态。
+    // 如果没有保存状态，则此方法不执行任何操作。
+    ctx.restore();
+    ctx.beginPath();
+    ctx.arc(100, 100, 40, 0, Math.PI * 2, true);
+    ctx.fill();
+
+    ctx.restore();
+    ctx.beginPath();
+    ctx.arc(100, 100, 20, 0, Math.PI * 2, true);
+    ctx.fill();
+</script>
+</body>
+</html>
